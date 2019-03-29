@@ -11,6 +11,16 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.0.2105168" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Magba.Infra.Crosscutting\Magba.Infra.Crosscutting.csproj" />
+    <ProjectReference Include="..\Magva.Domain\Magva.Domain.csproj" />
+    <ProjectReference Include="..\Magva.Infra.Data\Magva.Infra.Data.csproj" />
+    <ProjectReference Include="..\Magva.Service\Magva.Service.csproj" />
   </ItemGroup>
 
 </Project>

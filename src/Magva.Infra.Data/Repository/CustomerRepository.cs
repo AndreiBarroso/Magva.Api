@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Transactions;
+﻿using Magva.Domain.Entities;
 using Magva.Domain.Interfaces.Repository;
+using System;
+using System.Collections.Generic;
 
 namespace Magva.Infra.Data.Repository
 {
-    public class TransactionRepository : ITransactionRespository
+    public class CustomerRepository : ICustomerRespository
     {
-        public Transaction Add(Transaction obj)
+        public Customer Add(Customer obj)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Transaction> GetAll()
+        public IEnumerable<Customer> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Transaction GetById(Guid id)
+        public Customer GetById(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +27,7 @@ namespace Magva.Infra.Data.Repository
             throw new NotImplementedException();
         }
 
-        public Transaction Update(Transaction obj)
+        public Customer Update(Customer obj)
         {
             throw new NotImplementedException();
         }

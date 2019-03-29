@@ -1,14 +1,16 @@
-﻿using Magva.Domain.Entities;
+﻿using Magba.Infra.Crosscutting.DataTransferObject;
+using Magva.Domain.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace Magva.Domain.Interfaces.Service
 {
     public interface ICustomerService
     {
-        void Register(Customer customer);
-        void Update(Customer customer);
-        Customer GetCustomerById(Guid id);
-        IEquatable<Customer> GetAllCustomers();
+        Customer Register(Customer customer);
+        CustomerDto Update(CustomerDto customer);
+        CustomerDto GetCustomerById(Guid id);
+        IEnumerable<CustomerDto> GetAllCustomers();
         void Delete(Guid id);
     }
 }

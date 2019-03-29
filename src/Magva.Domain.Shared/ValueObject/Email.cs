@@ -1,19 +1,22 @@
 ﻿
 
+using System.Text.RegularExpressions;
+
 namespace Magva.Domain.Shared.ValueObject
 {
-    public class Email 
+    public class Email
     {
-        public Email(string address)
-        {
-            Address = address;
-        }
 
-        public string Address { get; private set; }
+        public string Address { get; set; }
 
         public override string ToString()
         {
             return Address;
+        }
+
+        public static bool Validate(string email)
+        {
+            return Regex.IsMatch(email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
         }
     }
 }

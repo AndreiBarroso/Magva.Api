@@ -8,7 +8,18 @@ namespace Magva.Infra.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Card> builder)
         {
-            throw new System.NotImplementedException();
+            builder.ToTable("Card");
+
+            builder.HasKey(x => x.Id).HasName("Id");
+
+            builder.Property(x => x.CardBrand).HasColumnName("CardBrand").HasMaxLength(25).HasColumnType("Varchar(25)").IsRequired();
+            builder.Property(x => x.Password).HasColumnName("Password").IsRequired();
+            builder.Property(x => x.Type).HasColumnName("Type").IsRequired();
+            builder.Property(x => x.HasPassword).HasColumnName("HasPassword").IsRequired();
+            builder.Property(x => x.ExpirationDate).HasColumnName("ExpirationDate").IsRequired();
+            builder.Property(x => x.Number).HasColumnName("Number").HasMaxLength(19).IsRequired();
+            builder.HasOne(x => x.CardholderName);
+          
         }
     }
 }

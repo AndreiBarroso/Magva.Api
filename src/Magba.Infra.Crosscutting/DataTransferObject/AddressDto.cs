@@ -1,11 +1,10 @@
-﻿
-using Magva.Domain.Shared.Entities;
+﻿using System;
 
-namespace Magva.Domain.Entities
+namespace Magba.Infra.Crosscutting.DataTransferObject
 {
-    public class Address : Entity
+    public class AddressDto
     {
-  
+        public Guid Id { get; set; }
         public string Street { get; set; }
         public string Number { get; set; }
         public string Complement { get; set; }
@@ -14,10 +13,5 @@ namespace Magva.Domain.Entities
         public string State { get; set; }
         public string Country { get; set; }
         public string ZipeCode { get; set; }
-
-        public override string ToString()
-        {
-            return $"{Street}, {Number} - {City}/{State}";
-        }
     }
 }

@@ -1,20 +1,18 @@
-﻿using Magva.Domain.Shared.Enum;
+﻿using Magva.Domain.Shared.Entities;
+using Magva.Domain.Shared.Enum;
+using System;
 
 namespace Magva.Domain.Entities
 {
-    public class Transaction
+    public class Transaction : Entity
     {
-        public Transaction(decimal amount, ETransactionType type, int number, Card card)
-        {
-            Amount = amount;
-            Type = type;
-            Number = number;
-            Card = card;
-        }
 
         public decimal Amount { get; set; }
         public ETransactionType Type { get; set; }
-        public int Number { get; set; }
-        public Card Card { get; set; }
+        public int NumberInstallments { get; set; }
+        public DateTime DateTransaction { get; set; }
+
+        public virtual Card Card { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

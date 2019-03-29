@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Magba.Infra.Crosscutting\Magba.Infra.Crosscutting.csproj" />
     <ProjectReference Include="..\Magva.Domain.Shared\Magva.Domain.Shared.csproj" />
   </ItemGroup>
 

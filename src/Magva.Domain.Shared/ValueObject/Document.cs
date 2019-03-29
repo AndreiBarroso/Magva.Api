@@ -8,7 +8,7 @@
 
         }
 
-        public string Number { get; private set; }
+        public string Number { get; set; }
 
         public override string ToString()
         {

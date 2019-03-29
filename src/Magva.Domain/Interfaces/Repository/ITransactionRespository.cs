@@ -1,9 +1,9 @@
-﻿using System.Transactions;
+﻿using Magva.Domain.Entities;
 
 namespace Magva.Domain.Interfaces.Repository
 {
-    public interface ITransactionRespository
+    public interface ITransactionRespository : IRepository<Transaction>
     {
-        void Add(Transaction transaction);
+   
     }
 }

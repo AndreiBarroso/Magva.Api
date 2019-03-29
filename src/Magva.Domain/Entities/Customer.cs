@@ -1,6 +1,7 @@
 ﻿using Magva.Domain.Shared.Entities;
 using Magva.Domain.Shared.ValueObject;
 using System;
+using System.Collections.Generic;
 
 namespace Magva.Domain.Entities
 {
@@ -12,7 +13,10 @@ namespace Magva.Domain.Entities
         public DateTime BirthDate { get; set; }
         public Document Document { get; set; }
         public string Phone { get; set; }
-        public Address Address { get; set; }
+
+        public virtual IEnumerable<Transaction> Transactions { get; set; }
+        public virtual Address Address { get; set; }
+
 
     }
 }
