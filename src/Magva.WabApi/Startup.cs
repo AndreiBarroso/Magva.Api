@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Magva.Domain.Interfaces.Repository;
+﻿using Magva.Domain.Interfaces.Repository;
 using Magva.Domain.Interfaces.Service;
 using Magva.Infra.Data.DataContext;
 using Magva.Infra.Data.Repository;
 using Magva.Service.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Magva.WabApi
 {
@@ -43,6 +37,12 @@ namespace Magva.WabApi
             services.AddTransient<ITransactionService, TransactionService>();
             services.AddTransient<ICustomerService, CustomerService>();
             services.AddTransient<ICardService, CardService>();
+
+            services.AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc("v1", new Info { Title = "Gol Airlines", Version = "v1" });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +58,13 @@ namespace Magva.WabApi
                 app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
+
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+            });
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>
@@ -66,7 +73,7 @@ namespace Magva.WabApi
                 c.RoutePrefix = string.Empty;
             });
 
-            app.UseHttpsRedirection();
+         
             app.UseMvc();
         }
     }

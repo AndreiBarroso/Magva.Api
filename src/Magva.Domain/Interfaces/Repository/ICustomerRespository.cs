@@ -1,9 +1,9 @@
-﻿using Magva.Domain.Entities;
-using System;
+﻿using Magba.Infra.Crosscutting.DataTransferObject;
+
 
 namespace Magva.Domain.Interfaces.Repository
 {
-    public interface ICustomerRespository : IRepository<Customer>
+    public interface ICustomerRespository : IRepository<CustomerDto>
     {
     }
 }

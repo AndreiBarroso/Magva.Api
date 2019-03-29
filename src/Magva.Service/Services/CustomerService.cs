@@ -18,27 +18,27 @@ namespace Magva.Service.Services
 
         public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            _repository.Remove(id);
         }
 
         public IEnumerable<CustomerDto> GetAllCustomers()
         {
-            throw new NotImplementedException();
+            return _repository.GetAll();
         }
 
         public CustomerDto GetCustomerById(Guid id)
         {
-            throw new NotImplementedException();
+            return GetCustomerById(id);
         }
 
-        public Customer Register(Customer customer)
+        public CustomerDto Register(CustomerDto customerDto)
         {
-            throw new NotImplementedException();
+            return _repository.Add(customerDto);
         }
 
         public CustomerDto Update(CustomerDto customer)
         {
-            throw new NotImplementedException();
+            return _repository.Update(customer);
         }
     }
 }

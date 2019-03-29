@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Transactions;
+using Magba.Infra.Crosscutting.DataTransferObject;
 using Magva.Domain.Interfaces.Repository;
 
 namespace Magva.Infra.Data.Repository
 {
     public class TransactionRepository : ITransactionRespository
     {
-        public Transaction Add(Transaction obj)
+        public TransactionDto Add(TransactionDto obj)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Transaction> GetAll()
+        public IEnumerable<TransactionDto> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Transaction GetById(Guid id)
+        public TransactionDto GetById(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +27,7 @@ namespace Magva.Infra.Data.Repository
             throw new NotImplementedException();
         }
 
-        public Transaction Update(Transaction obj)
+        public TransactionDto Update(TransactionDto obj)
         {
             throw new NotImplementedException();
         }

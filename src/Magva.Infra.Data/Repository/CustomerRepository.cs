@@ -1,4 +1,5 @@
-﻿using Magva.Domain.Entities;
+﻿using Magba.Infra.Crosscutting.DataTransferObject;
+using Magva.Domain.Entities;
 using Magva.Domain.Interfaces.Repository;
 using System;
 using System.Collections.Generic;
@@ -7,17 +8,17 @@ namespace Magva.Infra.Data.Repository
 {
     public class CustomerRepository : ICustomerRespository
     {
-        public Customer Add(Customer obj)
+        public CustomerDto Add(CustomerDto obj)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Customer> GetAll()
+        public IEnumerable<CustomerDto> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Customer GetById(Guid id)
+        public CustomerDto GetById(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +28,7 @@ namespace Magva.Infra.Data.Repository
             throw new NotImplementedException();
         }
 
-        public Customer Update(Customer obj)
+        public CustomerDto Update(CustomerDto obj)
         {
             throw new NotImplementedException();
         }

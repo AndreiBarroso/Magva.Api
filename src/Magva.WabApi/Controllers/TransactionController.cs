@@ -18,9 +18,9 @@ namespace Magva.WabApi.Controllers
 
         [HttpPost]
         [Route("v1/transaction")]
-        public void Insert([FromBody] Transaction transaction)
+        public void Insert([FromBody] TransactionDto transactionDto)
         {
-            _service.Add(transaction);
+            _service.Add(transactionDto);
         }
 
         [HttpDelete]

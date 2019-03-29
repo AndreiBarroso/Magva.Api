@@ -6,7 +6,7 @@ namespace Magba.Infra.Crosscutting.DataTransferObject
     public class CardDto
     {
         public Guid Id { get; set; }
-        public CustomerDto CardholderName { get; set; }
+        public Guid CardholderNameId { get; set; }
         public string Number { get; set; }
         public DateTime ExpirationDate { get; set; }
         public string CardBrand { get; set; }

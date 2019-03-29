@@ -11,7 +11,7 @@ namespace Magba.Infra.Crosscutting.DataTransferObject
         public int NumberInstallments { get; set; }
         public DateTime DateTransaction { get; set; }
 
-        public virtual CardDto Card { get; set; }
-        public virtual CustomerDto Customer { get; set; }
+        public Guid CardId { get; set; }
+        public Guid CustomerId { get; set; }
     }
 }

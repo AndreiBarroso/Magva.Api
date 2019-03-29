@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Magba.Infra.Crosscutting.DataTransferObject;
-using Magva.Domain.Entities;
 using Magva.Domain.Interfaces.Repository;
 using Magva.Domain.Interfaces.Service;
 
@@ -9,36 +8,36 @@ namespace Magva.Service.Services
 {
     public class CardService : ICardService
     {
-        private readonly ICardRespository _repostirody;
+        private readonly ICardRespository _repository;
 
-        public CardService(ICardRespository repostirody)
+        public CardService(ICardRespository repository)
         {
-            _repostirody = repostirody;
+            _repository = repository;
         }
 
-        public Card Add(Card card)
+        public CardDto Add(CardDto cardDto)
         {
-            throw new NotImplementedException();
+            return _repository.Add(cardDto);
         }
 
         public IEnumerable<CardDto> GetAll()
         {
-            throw new NotImplementedException();
+            return _repository.GetAll();
         }
 
         public CardDto GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return GetById(id);
         }
 
         public void Remove(Guid id)
         {
-            throw new NotImplementedException();
+            _repository.Remove(id);
         }
 
         public CardDto Update(CardDto cardDto)
         {
-            throw new NotImplementedException();
+            return _repository.Update(cardDto);
         }
     }
 }

@@ -13,6 +13,6 @@ namespace Magba.Infra.Crosscutting.DataTransferObject
         public string Phone { get; set; }
 
         public TransactionDto[] Transactions { get; set; }
-        public AddressDto Address { get; set; }
+        public Guid AddressId { get; set; }
     }
 }
