@@ -18,14 +18,14 @@ namespace Magva.WabApi.Controllers
 
         [HttpPost]
         [Route("v1/customer")]
-        public void Insert([FromBody] CustomerDto customerDto)
+        public void Insert([FromRoute] CustomerDto customerDto)
         {
             _service.Register(customerDto);
         }
 
         [HttpDelete]
         [Route("v1/customer/{id}")]
-        public void Delete(Guid id)
+        public void Delete([FromRoute] Guid id)
         {
             _service.Delete(id);
         }
@@ -39,14 +39,14 @@ namespace Magva.WabApi.Controllers
 
         [HttpGet]
         [Route("v1/customer/{id}")]
-        public CustomerDto GetById(Guid id)
+        public CustomerDto GetById([FromRoute] Guid id)
         {
             return _service.GetCustomerById(id);
         }
 
         [HttpPut]
         [Route("v1/customer")]
-        public void Update([FromBody]CustomerDto customer)
+        public void Update([FromRoute] CustomerDto customer)
         {
             _service.Update(customer);
         }
