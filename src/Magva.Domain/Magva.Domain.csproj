@@ -9,4 +9,8 @@
     <ProjectReference Include="..\Magva.Domain.Shared\Magva.Domain.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentValidator" Version="2.0.4" />
+  </ItemGroup>
+
 </Project>

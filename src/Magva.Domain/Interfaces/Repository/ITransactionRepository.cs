@@ -3,7 +3,8 @@
 
 namespace Magva.Domain.Interfaces.Repository
 {
-    public interface ICustomerRespository : IRepository<CustomerDto>
+    public interface ITransactionRepository : IRepository<TransactionDto>
     {
+   
     }
 }

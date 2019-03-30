@@ -5,7 +5,7 @@ using Magva.Domain.Interfaces.Repository;
 
 namespace Magva.Infra.Data.Repository
 {
-    public class TransactionRepository : ITransactionRespository
+    public class TransactionRepository : ITransactionRepository
     {
         public TransactionDto Add(TransactionDto obj)
         {

@@ -13,6 +13,7 @@ namespace Magva.Domain.Entities
         public DateTime BirthDate { get; set; }
         public Document Document { get; set; }
         public string Phone { get; set; }
+        public decimal Balance { get; set; }
 
         public virtual IEnumerable<Transaction> Transactions { get; set; }
         public virtual Address Address { get; set; }

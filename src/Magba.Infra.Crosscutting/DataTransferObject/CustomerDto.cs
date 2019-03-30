@@ -11,6 +11,7 @@ namespace Magba.Infra.Crosscutting.DataTransferObject
         public DateTime BirthDate { get; set; }
         public DocumentDto Document { get; set; }
         public string Phone { get; set; }
+        public decimal Balance { get; set; }
 
         public TransactionDto[] Transactions { get; set; }
         public Guid AddressId { get; set; }

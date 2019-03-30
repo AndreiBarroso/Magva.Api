@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Magva.Domain\Magva.Domain.csproj" />
+    <ProjectReference Include="..\Magva.Infra.Data\Magva.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>

@@ -29,8 +29,8 @@ namespace Magva.WabApi
             services.AddScoped<MagvaDataContext, MagvaDataContext>();
 
             //Repository
-            services.AddTransient<ICustomerRespository, CustomerRepository>();
-            services.AddTransient<ITransactionRespository, TransactionRepository>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<ITransactionRepository, TransactionRepository>();
             services.AddTransient<ICardRespository, CardRespository>();
 
             //Service

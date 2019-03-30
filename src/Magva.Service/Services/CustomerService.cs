@@ -9,9 +9,9 @@ namespace Magva.Service.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly ICustomerRespository _repository;
+        private readonly ICustomerRepository _repository;
 
-        public CustomerService(ICustomerRespository repository)
+        public CustomerService(ICustomerRepository repository)
         {
             _repository = repository;
         }

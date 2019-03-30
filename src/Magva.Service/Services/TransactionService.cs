@@ -3,20 +3,25 @@ using System.Collections.Generic;
 using Magba.Infra.Crosscutting.DataTransferObject;
 using Magva.Domain.Interfaces.Repository;
 using Magva.Domain.Interfaces.Service;
+using Magva.Domain.Validations.Customer;
 
 namespace Magva.Service.Services
 {
     public class TransactionService : ITransactionService
     {
-        private readonly ITransactionRespository _repository;
+        private readonly ITransactionRepository _repository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public TransactionService(ITransactionRespository repository)
+        public TransactionService(ITransactionRepository repository, ICustomerRepository customerRepository)
         {
             _repository = repository;
+            _customerRepository = customerRepository;
         }
 
         public TransactionDto Add(TransactionDto transaction)
         {
+           var CostomerBalance = _customerRepository.BalanceCustomer(transaction.CustomerId);
+            
             return _repository.Add(transaction);
         }
 
