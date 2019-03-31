@@ -1,5 +1,4 @@
-﻿using Magba.Infra.Crosscutting.DataTransferObject;
-using Magva.Domain.Entities;
+﻿using Magva.Infra.Crosscutting.DataTransferObject;
 using System;
 using System.Collections.Generic;
 

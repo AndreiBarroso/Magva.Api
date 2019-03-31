@@ -1,7 +1,7 @@
-﻿using Magba.Infra.Crosscutting.DataTransferObject.Enum;
+﻿using Magva.Infra.Crosscutting.DataTransferObject.Enum;
 using System;
 
-namespace Magba.Infra.Crosscutting.DataTransferObject
+namespace Magva.Infra.Crosscutting.DataTransferObject
 {
     public class CardDto
     {

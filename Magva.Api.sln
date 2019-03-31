@@ -13,19 +13,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infra", "4 - Infra", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1 - Data", "4.1 - Data", "{A74E7998-1906-42BF-95D9-AA1591093DB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magva.Domain", "src\Magva.Domain\Magva.Domain.csproj", "{EA3F9C75-BED0-4E09-9692-674102DDCE90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magva.Domain", "src\Magva.Domain\Magva.Domain.csproj", "{EA3F9C75-BED0-4E09-9692-674102DDCE90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magva.Domain.Shared", "src\Magva.Domain.Shared\Magva.Domain.Shared.csproj", "{C370DA3D-595B-4941-BBE3-DE0EA078FCF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magva.Domain.Shared", "src\Magva.Domain.Shared\Magva.Domain.Shared.csproj", "{C370DA3D-595B-4941-BBE3-DE0EA078FCF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magva.Service", "src\Magva.Service\Magva.Service.csproj", "{9ECFEA3B-D90E-4325-B4EB-77B83E7EE266}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magva.Service", "src\Magva.Service\Magva.Service.csproj", "{9ECFEA3B-D90E-4325-B4EB-77B83E7EE266}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magva.Infra.Data", "src\Magva.Infra.Data\Magva.Infra.Data.csproj", "{D9A6C379-5226-4847-BA37-C83F6AADE0D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magva.Infra.Data", "src\Magva.Infra.Data\Magva.Infra.Data.csproj", "{D9A6C379-5226-4847-BA37-C83F6AADE0D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magva.WabApi", "src\Magva.WabApi\Magva.WabApi.csproj", "{70F38774-6461-42D4-8F73-9483A5C415A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magva.WabApi", "src\Magva.WabApi\Magva.WabApi.csproj", "{70F38774-6461-42D4-8F73-9483A5C415A6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2 - Crosscutting", "4.2 - Crosscutting", "{16A7FAAE-952E-4456-BA57-7A56B6AFD70F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magba.Infra.Crosscutting", "src\Magba.Infra.Crosscutting\Magba.Infra.Crosscutting.csproj", "{7822F8AB-1938-4F7F-B8AA-8D77A82A874F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magva.Infra.Crosscutting", "src\Magba.Infra.Crosscutting\Magva.Infra.Crosscutting.csproj", "{7822F8AB-1938-4F7F-B8AA-8D77A82A874F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Tests", "5 - Tests", "{19F45BC3-29EC-4DE9-B3A0-959511E9E070}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magva.Tests", "src\Magva.Tests\Magva.Tests.csproj", "{54FEDA26-02F7-4345-A6C9-5E8C8161C5B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,10 @@ Global
 		{7822F8AB-1938-4F7F-B8AA-8D77A82A874F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7822F8AB-1938-4F7F-B8AA-8D77A82A874F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7822F8AB-1938-4F7F-B8AA-8D77A82A874F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54FEDA26-02F7-4345-A6C9-5E8C8161C5B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54FEDA26-02F7-4345-A6C9-5E8C8161C5B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54FEDA26-02F7-4345-A6C9-5E8C8161C5B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54FEDA26-02F7-4345-A6C9-5E8C8161C5B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +78,7 @@ Global
 		{70F38774-6461-42D4-8F73-9483A5C415A6} = {3A433BF7-B9E6-4195-AB3B-883718441A14}
 		{16A7FAAE-952E-4456-BA57-7A56B6AFD70F} = {6A0E3DE1-9275-4FDE-BA00-B5A5FC60A615}
 		{7822F8AB-1938-4F7F-B8AA-8D77A82A874F} = {16A7FAAE-952E-4456-BA57-7A56B6AFD70F}
+		{54FEDA26-02F7-4345-A6C9-5E8C8161C5B2} = {19F45BC3-29EC-4DE9-B3A0-959511E9E070}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1F647DCC-A626-459B-9686-74B4EFC0AAB8}

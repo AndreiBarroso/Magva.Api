@@ -1,12 +1,20 @@
-﻿namespace Magva.Domain.Shared.ValueObject
+﻿using FluentValidator;
+using FluentValidator.Validation;
+using Magva.Infra.Crosscutting.Constants;
+
+namespace Magva.Domain.Shared.ValueObject
 {
-    public class Document
+    public class Document : Notifiable
     {
         public Document(string number)
         {
             Number = number;
 
+            AddNotifications(new ValidationContract()
+                .IsTrue(Validate(Number), "Document",  ExceptionConstants.DOCUMENT_IS_NOT_VALID)
+            );
         }
+      
 
         public string Number { get; set; }
 

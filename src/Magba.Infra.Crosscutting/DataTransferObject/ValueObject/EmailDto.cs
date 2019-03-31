@@ -1,4 +1,4 @@
-﻿namespace Magba.Infra.Crosscutting.DataTransferObject.ValueObject
+﻿namespace Magva.Infra.Crosscutting.DataTransferObject.ValueObject
 {
     public class EmailDto
     {

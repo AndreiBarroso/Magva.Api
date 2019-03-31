@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Magba.Infra.Crosscutting.DataTransferObject
+namespace Magva.Infra.Crosscutting.DataTransferObject
 {
     public class AddressDto
     {

@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Magba.Infra.Crosscutting\Magba.Infra.Crosscutting.csproj" />
+    <ProjectReference Include="..\Magba.Infra.Crosscutting\Magva.Infra.Crosscutting.csproj" />
     <ProjectReference Include="..\Magva.Domain\Magva.Domain.csproj" />
     <ProjectReference Include="..\Magva.Infra.Data\Magva.Infra.Data.csproj" />
     <ProjectReference Include="..\Magva.Service\Magva.Service.csproj" />

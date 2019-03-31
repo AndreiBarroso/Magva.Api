@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Magba.Infra.Crosscutting.DataTransferObject.Enum
+namespace Magva.Infra.Crosscutting.DataTransferObject.Enum
 {
     public enum ECardTypeDto
     {

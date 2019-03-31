@@ -1,7 +1,7 @@
-﻿using Magba.Infra.Crosscutting.DataTransferObject.ValueObject;
+﻿using Magva.Infra.Crosscutting.DataTransferObject.ValueObject;
 using System;
 
-namespace Magba.Infra.Crosscutting.DataTransferObject
+namespace Magva.Infra.Crosscutting.DataTransferObject
 {
     public class CustomerDto
     {

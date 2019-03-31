@@ -1,5 +1,4 @@
-﻿using Magba.Infra.Crosscutting.DataTransferObject;
-using Magva.Domain.Entities;
+﻿using Magva.Infra.Crosscutting.DataTransferObject;
 using Magva.Domain.Interfaces.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;

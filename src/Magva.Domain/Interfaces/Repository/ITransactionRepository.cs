@@ -1,4 +1,4 @@
-﻿using Magba.Infra.Crosscutting.DataTransferObject;
+﻿using Magva.Infra.Crosscutting.DataTransferObject;
 
 
 namespace Magva.Domain.Interfaces.Repository

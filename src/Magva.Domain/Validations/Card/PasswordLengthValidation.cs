@@ -1,6 +1,6 @@
 ﻿using FluentValidator;
 using FluentValidator.Validation;
-using Magba.Infra.Crosscutting.Constants;
+using Magva.Infra.Crosscutting.Constants;
 
 namespace Magva.Domain.Validations.Card
 {

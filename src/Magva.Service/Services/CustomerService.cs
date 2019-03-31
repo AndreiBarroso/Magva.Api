@@ -1,4 +1,4 @@
-﻿using Magba.Infra.Crosscutting.DataTransferObject;
+﻿using Magva.Infra.Crosscutting.DataTransferObject;
 using Magva.Domain.Entities;
 using Magva.Domain.Interfaces.Repository;
 using Magva.Domain.Interfaces.Service;

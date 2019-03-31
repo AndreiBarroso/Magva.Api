@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Magba.Infra.Crosscutting.DataTransferObject;
+using Magva.Infra.Crosscutting.DataTransferObject;
 using Magva.Domain.Interfaces.Repository;
 using Magva.Domain.Interfaces.Service;
-using Magva.Domain.Validations.Customer;
 
 namespace Magva.Service.Services
 {
