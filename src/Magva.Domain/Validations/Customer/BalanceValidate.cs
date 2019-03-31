@@ -15,7 +15,7 @@ namespace Magva.Domain.Validations.Customer
         }
 
 
-         bool InsufficientBalanceValidate(decimal balance)
+        private bool InsufficientBalanceValidate(decimal balance)
         {
            return balance <= 0 ? true : false;
         }

@@ -15,7 +15,7 @@ namespace Magva.Domain.Validations.Card
 
         public bool LengthIsNotValid(string password)
         {
-            return (password.Length < 4 || password.Length > 5) ? true : false;
+            return (password.Length < 4 || password.Length > 6) ? true : false;
         }
     }
 }

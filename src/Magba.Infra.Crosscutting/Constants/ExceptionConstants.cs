@@ -8,6 +8,7 @@
         public static string PASSWORD_IS_NOT_VALID = "PASSWORD_IS_NOT_VALID";
         public static string VALUE_IS_NOT_VALID = "VALUE_IS_NOT_VALID";
         public static string DOCUMENT_IS_NOT_VALID = "DOCUMENT_IS_NOT_VALID";
+        public static string EMAIL_IS_NOT_VALID = "EMAIL_IS_NOT_VALID";
 
     }
 }
