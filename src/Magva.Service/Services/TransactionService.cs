@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Magva.Infra.Crosscutting.DataTransferObject;
 using Magva.Domain.Interfaces.Repository;
 using Magva.Domain.Interfaces.Service;
+using Magva.Domain.Validations.Customer;
 
 namespace Magva.Service.Services
 {
@@ -10,18 +11,30 @@ namespace Magva.Service.Services
     {
         private readonly ITransactionRepository _repository;
         private readonly ICustomerRepository _customerRepository;
+        private readonly ICardRespository _cardRepository;
 
-        public TransactionService(ITransactionRepository repository, ICustomerRepository customerRepository)
+        public TransactionService(ITransactionRepository repository,
+            ICustomerRepository customerRepository,
+            ICardRespository cardRepository)
         {
             _repository = repository;
             _customerRepository = customerRepository;
+            _cardRepository = cardRepository;
         }
 
-        public TransactionDto Add(TransactionDto transaction)
+        public TransactionDto Add(TransactionDto transactionDto)
         {
-           var CostomerBalance = _customerRepository.BalanceCustomer(transaction.CustomerId);
-            
-            return _repository.Add(transaction);
+            var customerCard = _cardRepository.GetCardByIdCustomer(transactionDto.CustomerId);
+            var balanceValidate = new BalanceValidate(customerCard.CardholderNameId.Balance);
+
+            if (customerCard.Active && balanceValidate.Valid)
+            {
+                return _repository.Add(transactionDto);
+            }
+
+
+            return transactionDto;
+
         }
 
         public IEnumerable<TransactionDto> GetAll()

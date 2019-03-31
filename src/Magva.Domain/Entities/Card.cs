@@ -14,5 +14,6 @@ namespace Magva.Domain.Entities
         public ECardType Type { get; set; }
         public bool Active { get; set; }
         public bool HasPassword { get; set; }
+
     }
 }
