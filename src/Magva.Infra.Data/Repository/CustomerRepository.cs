@@ -19,7 +19,20 @@ namespace Magva.Infra.Data.Repository
 
         public CustomerDto Add(CustomerDto obj)
         {
-            throw new NotImplementedException();
+            var customer = new CustomerDto
+            {
+                Phone = obj.Phone,
+                Balance = obj.Balance,
+                Name = obj.Name,
+                Email = obj.Email,
+                Document = obj.Document
+
+            };
+            _context.Entry<CustomerDto>(customer)
+                .State = EntityState.Added;
+            _context.SaveChanges();
+
+            return customer;
         }
 
         public CustomerDto BalanceCustomer(Guid id)
@@ -44,7 +57,11 @@ namespace Magva.Infra.Data.Repository
                    BirthDate = x.BirthDate,
                    Id = x.Id,
                    Phone = x.Phone,
-                   Balance = x.Balance
+                   Balance = x.Balance,
+                   Name = x.Name.ToString(),
+                   Email = x.Email.ToString(),
+                   Document = x.Document.ToString()
+
                })
                .AsNoTracking()
                .ToList();
@@ -52,17 +69,48 @@ namespace Magva.Infra.Data.Repository
 
         public CustomerDto GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return _context
+              .Customers
+              .Select(x => new CustomerDto
+              {
+                  BirthDate = x.BirthDate,
+                  Id = x.Id,
+                  Phone = x.Phone,
+                  Balance = x.Balance,
+                  Name = x.Name.ToString(),
+                  Email = x.Email.ToString(),
+                  Document = x.Document.ToString()
+              })
+               .AsNoTracking()
+               .Where(x => x.Id == id)
+               .FirstOrDefault();
         }
 
         public void Remove(Guid id)
         {
-            throw new NotImplementedException();
+            var customer = GetById(id);
+
+            _context.Remove(customer);
+            _context.SaveChanges();
         }
 
         public CustomerDto Update(CustomerDto obj)
         {
-            throw new NotImplementedException();
+            var customer = new CustomerDto
+            {
+
+                Phone = obj.Phone,
+                Balance = obj.Balance,
+                Name = obj.Name.ToString(),
+                Email = obj.Email.ToString(),
+                Document = obj.Document.ToString()
+
+            };
+            _context.Entry<CustomerDto>(customer)
+                .State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return customer;
         }
     }
 }

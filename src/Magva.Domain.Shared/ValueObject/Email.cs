@@ -1,6 +1,4 @@
-﻿
-
-using FluentValidator;
+﻿using FluentValidator;
 using FluentValidator.Validation;
 using Magva.Infra.Crosscutting.Constants;
 using System.Text.RegularExpressions;

@@ -19,18 +19,60 @@ namespace Magva.Infra.Data.Repository
 
         public CardDto Add(CardDto obj)
         {
-            throw new NotImplementedException();
+            var card = new CardDto
+            {
+                ExpirationDate = obj.ExpirationDate,
+                CardBrand = obj.CardBrand,
+                Password = obj.Password,
+                Active = obj.Active,
+                HasPassword = obj.HasPassword,
+                Number = obj.Number
+
+            };
+            _context.Entry<CardDto>(card)
+                .State = EntityState.Added;
+            _context.SaveChanges();
+
+            return card;
         }
 
         public IEnumerable<CardDto> GetAll()
         {
-            throw new NotImplementedException();
+            return _context
+                .Cards
+                .Select(x => new CardDto
+                {
+                    Id = x.Id,
+                    ExpirationDate = x.ExpirationDate,
+                    Number = x.Number,
+                    Active = x.Active,
+                    CardBrand = x.CardBrand,
+                    HasPassword = x.HasPassword,
+                    Password = x.Password,
+
+                });
         }
 
         public CardDto GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return _context
+                .Cards
+                .Select(x => new CardDto
+                {
+                    Id = x.Id,
+                    ExpirationDate = x.ExpirationDate,
+                    Number = x.Number,
+                    Active = x.Active,
+                    CardBrand = x.CardBrand,
+                    HasPassword = x.HasPassword,
+                    Password = x.Password,
+
+                })
+                .AsNoTracking()
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
         }
+    
 
         public CardDto GetCardByIdCustomer(Guid id)
         {
@@ -52,12 +94,28 @@ namespace Magva.Infra.Data.Repository
 
         public void Remove(Guid id)
         {
-            throw new NotImplementedException();
+            var card = GetById(id);
+            _context.Remove(card);
+            _context.SaveChanges();
         }
 
         public CardDto Update(CardDto obj)
         {
-            throw new NotImplementedException();
+            var card = new CardDto
+            {
+                ExpirationDate = obj.ExpirationDate,
+                CardBrand = obj.CardBrand,
+                Password = obj.Password,
+                Active = obj.Active,
+                HasPassword = obj.HasPassword,
+                Number = obj.Number
+
+            };
+            _context.Entry<CardDto>(card)
+                .State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return card;
         }
     }
 }
