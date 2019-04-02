@@ -16,7 +16,6 @@ namespace Magva.Domain.Entities
         public decimal Balance { get; set; }
 
         public virtual IEnumerable<Transaction> Transactions { get; set; }
-        public virtual Address Address { get; set; }
 
 
     }

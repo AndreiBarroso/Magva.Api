@@ -12,7 +12,6 @@ namespace Magva.Infra.Data.DataContext
         }
 
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Address> Addresses { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
 
@@ -20,7 +19,6 @@ namespace Magva.Infra.Data.DataContext
         {
        
             modelBuilder.ApplyConfiguration(new CustomerMap());
-            modelBuilder.ApplyConfiguration(new AddressMap());
             modelBuilder.ApplyConfiguration(new CardMap());
             modelBuilder.ApplyConfiguration(new TransactionMap());
         }

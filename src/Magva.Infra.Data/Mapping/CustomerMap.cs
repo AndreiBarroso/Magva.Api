@@ -48,7 +48,6 @@ namespace Magva.Infra.Data.Mapping
 
 
             builder.HasMany(x => x.Transactions).WithOne(x => x.Customer);
-            builder.HasOne(x => x.Address);
 
         }
     }

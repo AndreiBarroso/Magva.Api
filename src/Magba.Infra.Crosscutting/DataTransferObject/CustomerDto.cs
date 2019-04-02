@@ -14,6 +14,5 @@ namespace Magva.Infra.Crosscutting.DataTransferObject
         public decimal Balance { get; set; }
 
         public TransactionDto[] Transactions { get; set; }
-        public Guid AddressId { get; set; }
     }
 }

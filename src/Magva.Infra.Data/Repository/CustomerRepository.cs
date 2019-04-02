@@ -44,8 +44,7 @@ namespace Magva.Infra.Data.Repository
                    BirthDate = x.BirthDate,
                    Id = x.Id,
                    Phone = x.Phone,
-                   Balance = x.Balance,
-                   AddressId = x.Address.Id
+                   Balance = x.Balance
                })
                .AsNoTracking()
                .ToList();
