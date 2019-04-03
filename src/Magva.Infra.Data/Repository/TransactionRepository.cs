@@ -1,35 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using Magva.Infra.Crosscutting.DataTransferObject;
-using Magva.Domain.Interfaces.Repository;
+﻿using Magva.Domain.Interfaces.Repository;
+using Magva.Domain.Entities;
+using Magva.Infra.Data.DataContext;
 
 namespace Magva.Infra.Data.Repository
 {
-    public class TransactionRepository : ITransactionRepository
+    public class TransactionRepository : Repository<Transaction>,  ITransactionRepository
     {
-        public TransactionDto Add(TransactionDto obj)
-        {
-            throw new NotImplementedException();
-        }
 
-        public IEnumerable<TransactionDto> GetAll()
+        public TransactionRepository(MagvaDataContext context) : base(context)
         {
-            throw new NotImplementedException();
-        }
 
-        public TransactionDto GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TransactionDto Update(TransactionDto obj)
-        {
-            throw new NotImplementedException();
         }
     }
 }

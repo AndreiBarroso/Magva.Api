@@ -11,7 +11,6 @@ namespace Magva.Infra.Crosscutting.DataTransferObject
         public DateTime BirthDate { get; set; }
         public string Document { get; set; }
         public string Phone { get; set; }
-        public decimal Balance { get; set; }
 
         public TransactionDto[] Transactions { get; set; }
     }

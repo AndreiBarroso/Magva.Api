@@ -1,9 +1,8 @@
-﻿using Magva.Infra.Crosscutting.DataTransferObject;
-
+﻿using Magva.Domain.Entities;
 
 namespace Magva.Domain.Interfaces.Repository
 {
-    public interface ITransactionRepository : IRepository<TransactionDto>
+    public interface ITransactionRepository : IRepository<Transaction>
     {
    
     }

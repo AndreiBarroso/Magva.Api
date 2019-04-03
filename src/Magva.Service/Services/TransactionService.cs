@@ -25,7 +25,7 @@ namespace Magva.Service.Services
         public TransactionDto Add(TransactionDto transactionDto)
         {
             var customerCard = _cardRepository.GetCardByIdCustomer(transactionDto.CustomerId);
-            var balanceValidate = new BalanceValidate(customerCard.CardholderNameId.Balance);
+            var balanceValidate = new BalanceValidate(customerCard.Balance);
 
             if (customerCard.Active && balanceValidate.Valid)
             {

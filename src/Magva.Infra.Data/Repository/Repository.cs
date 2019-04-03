@@ -39,7 +39,7 @@ namespace Magva.Infra.Data.Repository
 
         public void Remove(Guid id)
         {
-            throw new NotImplementedException();
+            DbSet.Remove(DbSet.Find(id));
         }
 
         public TEntity Update(TEntity obj)
