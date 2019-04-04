@@ -43,7 +43,6 @@ namespace Magva.Infra.Data.Mapping
                 .IsRequired();
             });
 
-            builder.Property(x => x.BirthDate).HasColumnName("BirthDate").IsRequired();
             builder.Property(x => x.Phone).HasColumnName("Phone").HasMaxLength(50).HasColumnType("Varchar(50)").IsRequired();
 
 

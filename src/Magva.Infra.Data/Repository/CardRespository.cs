@@ -26,7 +26,8 @@ namespace Magva.Infra.Data.Repository
                  {
                      Id = x.Id,
                      Balance = x.Balance,
-                     CardholderName = x.CardholderName.Name.ToString(),
+                     FirstName = x.Customer.Name.FirstName,
+                     LastName = x.Customer.Name.LastName,
                      Active = x.Active,
                      CardBrand = x.CardBrand,
                      HasPassword = x.HasPassword,
