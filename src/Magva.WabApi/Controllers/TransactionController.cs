@@ -1,5 +1,4 @@
 ﻿using Magva.Infra.Crosscutting.DataTransferObject;
-using Magva.Domain.Entities;
 using Magva.Domain.Interfaces.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,10 +16,17 @@ namespace Magva.WabApi.Controllers
         }
 
         [HttpPost]
-        [Route("v1/transaction")]
-        public void Insert([FromRoute] TransactionDto transactionDto)
+        [Route("v1/transaction/deposit")]
+        public void Deposit([FromRoute] TransactionDto transactionDto)
         {
-            _service.Add(transactionDto);
+            _service.Deposit(transactionDto);
+        }
+
+        [HttpPost]
+        [Route("v1/transaction/withdrawal")]
+        public void Withdrawal([FromRoute] TransactionDto transactionDto)
+        {
+            _service.Withdrawal(transactionDto);
         }
 
         [HttpDelete]

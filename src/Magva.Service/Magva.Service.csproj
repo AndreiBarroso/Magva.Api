@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NETCore.Encrypt" Version="2.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Magva.Domain\Magva.Domain.csproj" />
     <ProjectReference Include="..\Magva.Infra.Data\Magva.Infra.Data.csproj" />
   </ItemGroup>

@@ -15,7 +15,6 @@ namespace Magva.Domain.Shared.ValueObject
             );
         }
       
-
         public string Number { get; set; }
 
         public override string ToString()

@@ -10,7 +10,7 @@ namespace Magva.Infra.Data.Mapping
         {
             builder.ToTable("Card");
 
-            builder.HasKey(x => x.Id).HasName("Id");
+            builder.HasKey(x => x.Id);
 
             builder.Property(x => x.CardBrand).HasColumnName("CardBrand").HasMaxLength(25).HasColumnType("Varchar(25)").IsRequired();
             builder.Property(x => x.Password).HasColumnName("Password").IsRequired();
@@ -18,9 +18,11 @@ namespace Magva.Infra.Data.Mapping
             builder.Property(x => x.Active).HasColumnName("Active").IsRequired();
             builder.Property(x => x.HasPassword).HasColumnName("HasPassword").IsRequired();
             builder.Property(x => x.ExpirationDate).HasColumnName("ExpirationDate").IsRequired();
-            builder.Property(x => x.Number).HasColumnName("Number").HasMaxLength(19).IsRequired();
-            builder.HasOne(x => x.CardholderName);
-          
+            builder.Property(x => x.Number).HasColumnName("Number").IsRequired();
+            builder.Property(x => x.SecurityCode).HasColumnName("SecurityCode").HasMaxLength(5).IsRequired();
+            builder.Property(x => x.Balance).HasColumnName("Balance").HasColumnType("money").IsRequired();
+            builder.Property(x => x.CardholderName).HasColumnName("CardholderName").IsRequired();
+            builder.HasOne(x => x.Customer);
         }
     }
 }

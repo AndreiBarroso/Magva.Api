@@ -10,40 +10,30 @@ namespace Magva.Infra.Data.Mapping
         {
             builder.ToTable("Customer");
 
-            builder.HasKey(x => x.Id).HasName("Id");
+            builder.HasKey(x => x.Id);
 
-            builder.OwnsOne(x => x.Name, name =>
-            {
-                name.Property(x => x.FirstName)
-                .HasColumnName("FirstName")
-                .HasColumnType("Varchar()")
-                .IsRequired();
-            });
 
-            builder.OwnsOne(x => x.Name, name =>
-            {
-                name.Property(x => x.LastName)
-                .HasColumnName("LastName")
+            builder.Property(x => x.Name)
+                .HasColumnName("Name")
                 .HasColumnType("Varchar(40)")
                 .IsRequired();
-            });
 
-            builder.OwnsOne(x => x.Email, email =>
-            {
-                email.Property(x => x.Address)
-                    .HasColumnName("Email")
-                    .HasColumnType("Varchar(25)")
-                    .IsRequired();
-            });
-            builder.OwnsOne(x => x.Document, doc =>
-            {
-                doc.Property(x => x.Number)
-                .HasColumnName("Number")
-                .HasColumnType("Varchar(11)")
+            builder.Property(x => x.Email)
+                .HasColumnName("Email")
+                .HasColumnType("Varchar(25)")
                 .IsRequired();
-            });
 
-            builder.Property(x => x.Phone).HasColumnName("Phone").HasMaxLength(50).HasColumnType("Varchar(50)").IsRequired();
+            builder.Property(x => x.Document)
+            .HasColumnName("Document")
+            .HasColumnType("Varchar(11)")
+            .IsRequired();
+
+
+            builder.Property(x => x.Phone)
+                .HasColumnName("Phone")
+                .HasMaxLength(50)
+                .HasColumnType("Varchar(50)")
+                .IsRequired();
 
 
             builder.HasMany(x => x.Transactions).WithOne(x => x.Customer);

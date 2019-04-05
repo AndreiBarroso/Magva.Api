@@ -6,8 +6,7 @@ namespace Magva.Infra.Crosscutting.DataTransferObject
     public class CardDto
     {
         public Guid Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Name { get; set; }
         public string Number { get; set; }
         public int SecurityCode { get; set; }
         public DateTime ExpirationDate { get; set; }

@@ -10,7 +10,7 @@ namespace Magva.Infra.Data.Mapping
         {
             builder.ToTable("Transaction");
 
-            builder.HasKey(x => x.Id).HasName("Id");
+            builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Amount).HasColumnName("Amount").HasMaxLength(50).HasColumnName("money").IsRequired();
             builder.Property(x => x.NumberInstallments).HasColumnName("Number").IsRequired();

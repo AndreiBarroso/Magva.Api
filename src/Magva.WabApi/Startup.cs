@@ -40,7 +40,7 @@ namespace Magva.WabApi
 
             services.AddSwaggerGen(x =>
             {
-                x.SwaggerDoc("v1", new Info { Title = "Gol Airlines", Version = "v1" });
+                x.SwaggerDoc("v1", new Info { Title = "Magva Tecnologia", Version = "v1" });
             });
 
         }

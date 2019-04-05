@@ -6,7 +6,9 @@ namespace Magva.Domain.Interfaces.Service
 {
     public interface ITransactionService
     {
-        TransactionDto Add(TransactionDto transactionDto);
+
+        TransactionDto Withdrawal(TransactionDto transactionDto);
+        TransactionDto Deposit(TransactionDto transactionDto);
         TransactionDto Update(TransactionDto transactionDto);
         void Remove(Guid id);
         TransactionDto GetById(Guid id);

@@ -4,14 +4,16 @@ using Magva.Infra.Data.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Magva.Infra.Data.Migrations
 {
     [DbContext(typeof(MagvaDataContext))]
-    partial class MagvaDataContextModelSnapshot : ModelSnapshot
+    [Migration("20190404212217_NewModelDatabase")]
+    partial class NewModelDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

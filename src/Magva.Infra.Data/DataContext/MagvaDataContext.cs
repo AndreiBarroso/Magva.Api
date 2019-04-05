@@ -8,7 +8,7 @@ namespace Magva.Infra.Data.DataContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=magva.database.windows.net;Initial Catalog=magva;User ID=magva;Password=********;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
         }
 
         public DbSet<Customer> Customers { get; set; }

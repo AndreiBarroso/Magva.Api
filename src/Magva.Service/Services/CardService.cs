@@ -7,6 +7,7 @@ using Magva.Domain.Entities;
 using Magva.Infra.Crosscutting.DataTransferObject.Enum;
 using Magva.Domain.Shared.Enum;
 using System.Linq;
+using NETCore.Encrypt;
 
 namespace Magva.Service.Services
 {
@@ -22,7 +23,7 @@ namespace Magva.Service.Services
         public CardDto Add(CardDto cardDto)
         {
             var card = HydrateCard(cardDto);
-             _repository.Add(card);
+            _repository.Add(card);
 
             return HydrateCardDto(card);
         }
@@ -63,8 +64,7 @@ namespace Magva.Service.Services
                 Password = card.Password,
                 HasPassword = card.HasPassword,
                 Type = (ECardTypeDto)card.Type,
-                FirstName = card.Customer.Name.FirstName,
-                LastName = card.Customer.Name.LastName,
+                Name = card.CardholderName,
                 Id = card.Id
             };
         }
@@ -79,10 +79,10 @@ namespace Magva.Service.Services
                 ExpirationDate = cardDto.ExpirationDate,
                 Number = cardDto.Number,
                 SecurityCode = cardDto.SecurityCode,
-                Password = cardDto.Password,
+                Password = (cardDto.Password == null) ? EncryptProvider.Base64Encrypt(cardDto.Password) : string.Empty,
                 HasPassword = cardDto.HasPassword,
                 Type = (ECardType)cardDto.Type,
-                CardholderName = (cardDto.FirstName + ' ' + cardDto.LastName),
+                CardholderName = cardDto.Name,
                 Id = cardDto.Id
             };
         }

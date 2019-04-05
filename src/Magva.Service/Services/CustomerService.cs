@@ -56,10 +56,9 @@ namespace Magva.Service.Services
             return new Customer
             {
                 Phone = customerDto.Phone,
-                Document = new Document(customerDto.Document),
-                Email = new Email(customerDto.Email),
-                Id = customerDto.Id,
-                Name = new Name(customerDto.FirstName, customerDto.LastName)
+                Document = customerDto.Document,
+                Email = customerDto.Email,
+                Name = customerDto.Name
               
 
             };
@@ -69,12 +68,10 @@ namespace Magva.Service.Services
         {
             return new CustomerDto
             {
-                FirstName  = customer.Name.FirstName,
-                LastName = customer.Name.LastName,
-                Document = customer.Document.ToString(),
-                Email = customer.Document.ToString(),
+                Name = customer.Name,
+                Document = customer.Document,
+                Email = customer.Document,
                 Phone = customer.Phone
-
             };
         }
     }

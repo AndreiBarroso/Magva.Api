@@ -11,5 +11,15 @@ namespace Magva.Infra.Data.Repository
         {
 
         }
+
+        public Transaction Deposit(Transaction transaction)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Transaction Withdrawal(Transaction transaction)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

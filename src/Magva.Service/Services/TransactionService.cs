@@ -29,19 +29,42 @@ namespace Magva.Service.Services
         public TransactionDto Add(TransactionDto transactionDto)
         {
             var customerCard = _cardRepository.GetCardByIdCustomer(transactionDto.CustomerId);
+
+            var transaction = HydrateTransaction(transactionDto);
+
+
+            return HydrateTransactionDto(transaction);
+
+        }
+
+        public TransactionDto Withdrawal(TransactionDto transactionDto)
+        {
+            var customerCard = _cardRepository.GetCardByIdCustomer(transactionDto.CustomerId);
             var balanceValidate = new BalanceValidate(customerCard.Balance);
 
             var transaction = HydrateTransaction(transactionDto);
 
             if (customerCard.Active && balanceValidate.Valid)
             {
-          
-                 _repository.Add(transaction);
+                _repository.Withdrawal(transaction);
             }
-
             return HydrateTransactionDto(transaction);
 
         }
+
+        public TransactionDto Deposit(TransactionDto transactionDto)
+        {
+            var customerCard = _cardRepository.GetCardByIdCustomer(transactionDto.CustomerId);
+
+            var transaction = HydrateTransaction(transactionDto);
+            if (customerCard.Active)
+            {
+                _repository.Deposit(transaction);
+            }
+
+            return HydrateTransactionDto(transaction);
+        }
+
 
         public IEnumerable<TransactionDto> GetAll()
         {
@@ -92,6 +115,7 @@ namespace Magva.Service.Services
                 Type = (ETransactionType)transactionDto.Type,
             };
         }
+
     }
 
 }
