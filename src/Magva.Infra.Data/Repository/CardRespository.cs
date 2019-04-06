@@ -18,6 +18,27 @@ namespace Magva.Infra.Data.Repository
             _context = context;
         }
 
+        public IEnumerable<Card> GetByCardAndCustomer()
+        {
+            return _context
+                 .Cards
+                 .Include(x => x.Customer)
+                 .AsNoTracking()
+                 .ToList();
+        }
+
+
+        public Card GetCardByNumberAndSecurityCode(string number, int securityCode)
+        {
+            return _context
+                .Cards
+                .Include(x => x.Customer)
+                .Where(x => x.Number == number && x.SecurityCode == securityCode)
+                .AsNoTracking()
+                .FirstOrDefault();
+        }
+
+
         public CardDto GetCardByIdCustomer(Guid id)
         {
             return _context
@@ -26,7 +47,7 @@ namespace Magva.Infra.Data.Repository
                  {
                      Id = x.Id,
                      Balance = x.Balance,
-                     Name = x.Customer.Name,
+                     CardholderName = x.Customer.Name,
                      Active = x.Active,
                      CardBrand = x.CardBrand,
                      HasPassword = x.HasPassword,
@@ -38,6 +59,23 @@ namespace Magva.Infra.Data.Repository
                  .Where(x => x.Id == id)
                  .FirstOrDefault();
 
+        }
+
+        public Card GetByCardId(Guid id)
+        {
+            return _context
+                 .Cards
+                 .Include(x => x.Customer)
+                 .Where(x => x.Id == id)
+                 .AsNoTracking()
+                 .FirstOrDefault();
+        }
+
+        public void UpdateBalance(Card card, decimal balance)
+        {
+            _context.Cards.Attach(card).Property(x => x.Balance).IsModified = true;
+
+            _context.SaveChanges();
 
         }
     }

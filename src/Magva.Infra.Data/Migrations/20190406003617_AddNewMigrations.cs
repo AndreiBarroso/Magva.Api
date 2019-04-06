@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Magva.Infra.Data.Migrations
 {
-    public partial class NewModelDatabase : Migration
+    public partial class AddNewMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,14 +29,13 @@ namespace Magva.Infra.Data.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Number = table.Column<string>(nullable: false),
                     SecurityCode = table.Column<int>(maxLength: 5, nullable: false),
-                    ExpirationDate = table.Column<DateTime>(nullable: false),
+                    ExpirationDate = table.Column<string>(maxLength: 7, nullable: false),
                     CardBrand = table.Column<string>(type: "Varchar(25)", maxLength: 25, nullable: false),
                     Password = table.Column<string>(nullable: false),
                     Type = table.Column<int>(nullable: false),
                     Active = table.Column<bool>(nullable: false),
                     HasPassword = table.Column<bool>(nullable: false),
                     Balance = table.Column<decimal>(type: "money", nullable: false),
-                    CardholderName = table.Column<string>(nullable: false),
                     CustomerId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
@@ -57,9 +56,10 @@ namespace Magva.Infra.Data.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     money = table.Column<decimal>(maxLength: 50, nullable: false),
                     Type = table.Column<int>(nullable: false),
-                    Number = table.Column<int>(nullable: false),
+                    NumberInstallments = table.Column<int>(nullable: false),
                     DateTransaction = table.Column<DateTime>(nullable: false),
-                    CardId = table.Column<Guid>(nullable: true),
+                    Number = table.Column<string>(nullable: false),
+                    CardId = table.Column<Guid>(nullable: false),
                     CustomerId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
@@ -70,7 +70,7 @@ namespace Magva.Infra.Data.Migrations
                         column: x => x.CardId,
                         principalTable: "Card",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Transaction_Customer_CustomerId",
                         column: x => x.CustomerId,

@@ -35,8 +35,7 @@ namespace Magva.Infra.Data.Mapping
                 .HasColumnType("Varchar(50)")
                 .IsRequired();
 
-
-            builder.HasMany(x => x.Transactions).WithOne(x => x.Customer);
+            builder.HasMany(x => x.Transactions);
 
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Magva.Domain.Entities;
 using Magva.Infra.Data.Mapping;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Magva.Infra.Data.DataContext
 {
@@ -8,7 +9,13 @@ namespace Magva.Infra.Data.DataContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\OneDrive\Documentos\golairlines_db.mdf;Integrated Security=True;Connect Timeout=30");
 
+            //optionsBuilder
+            //    .EnableSensitiveDataLogging(true)
+            //    .UseLoggerFactory(new LoggerFactory().AddConsole((category, level) =>
+            //    level == LogLevel.Information &&
+            //    category == DbLoggerCategory.Database.Command.Name, true));
         }
 
         public DbSet<Customer> Customers { get; set; }

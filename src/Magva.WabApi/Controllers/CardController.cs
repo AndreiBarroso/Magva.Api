@@ -22,6 +22,7 @@ namespace Magva.WabApi.Controllers
             _service.Add(cardDto);
         }
 
+
         [HttpDelete]
         [Route("v1/cards/{id}")]
         public void Delete([FromRoute]Guid id)
@@ -45,7 +46,7 @@ namespace Magva.WabApi.Controllers
 
         [HttpPut]
         [Route("v1/cards")]
-        public void Update([FromRoute] CardDto cardDto)
+        public void Update([FromBody] CardDto cardDto)
         {
             _service.Update(cardDto);
         }

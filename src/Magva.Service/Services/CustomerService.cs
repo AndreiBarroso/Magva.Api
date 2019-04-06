@@ -55,12 +55,11 @@ namespace Magva.Service.Services
         {
             return new Customer
             {
+                Id = customerDto.Id,
                 Phone = customerDto.Phone,
                 Document = customerDto.Document,
                 Email = customerDto.Email,
                 Name = customerDto.Name
-              
-
             };
         }
 
@@ -68,6 +67,7 @@ namespace Magva.Service.Services
         {
             return new CustomerDto
             {
+                Id = customer.Id,
                 Name = customer.Name,
                 Document = customer.Document,
                 Email = customer.Document,

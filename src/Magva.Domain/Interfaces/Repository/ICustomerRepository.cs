@@ -6,5 +6,6 @@ namespace Magva.Domain.Interfaces.Repository
 {
     public interface ICustomerRepository : IRepository<Customer>
     {
+        Customer GetCustomerByDocument(string document);
     }
 }

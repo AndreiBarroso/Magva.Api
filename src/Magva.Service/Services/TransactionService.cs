@@ -14,7 +14,6 @@ namespace Magva.Service.Services
     public class TransactionService : ITransactionService
     {
         private readonly ITransactionRepository _repository;
-        private readonly ICustomerRepository _customerRepository;
         private readonly ICardRespository _cardRepository;
 
         public TransactionService(ITransactionRepository repository,
@@ -22,31 +21,22 @@ namespace Magva.Service.Services
             ICardRespository cardRepository)
         {
             _repository = repository;
-            _customerRepository = customerRepository;
             _cardRepository = cardRepository;
-        }
-
-        public TransactionDto Add(TransactionDto transactionDto)
-        {
-            var customerCard = _cardRepository.GetCardByIdCustomer(transactionDto.CustomerId);
-
-            var transaction = HydrateTransaction(transactionDto);
-
-
-            return HydrateTransactionDto(transaction);
-
         }
 
         public TransactionDto Withdrawal(TransactionDto transactionDto)
         {
-            var customerCard = _cardRepository.GetCardByIdCustomer(transactionDto.CustomerId);
-            var balanceValidate = new BalanceValidate(customerCard.Balance);
+            var card = HydrateCardDto(_cardRepository.GetCardByNumberAndSecurityCode(transactionDto.Number, transactionDto.SecurityCode));
 
-            var transaction = HydrateTransaction(transactionDto);
+            var balanceValidate = new BalanceValidate(card.Balance);
 
-            if (customerCard.Active && balanceValidate.Valid)
+
+            var transaction = HydrateTransaction(transactionDto, card);
+
+            if (card.Active && balanceValidate.Valid && 
+                (card.Number.Equals(transactionDto.Number)))
             {
-                _repository.Withdrawal(transaction);
+                _repository.Add(transaction);
             }
             return HydrateTransactionDto(transaction);
 
@@ -54,12 +44,16 @@ namespace Magva.Service.Services
 
         public TransactionDto Deposit(TransactionDto transactionDto)
         {
-            var customerCard = _cardRepository.GetCardByIdCustomer(transactionDto.CustomerId);
+            var card = _cardRepository.GetCardByNumberAndSecurityCode(transactionDto.Number, transactionDto.SecurityCode);
 
-            var transaction = HydrateTransaction(transactionDto);
-            if (customerCard.Active)
+            var cardDto = HydrateCardDto(card);
+
+            var transaction = HydrateTransaction(transactionDto, cardDto);
+
+            if (cardDto.Active && (cardDto.Number.Equals(transactionDto.Number)))
             {
-                _repository.Deposit(transaction);
+                _cardRepository.UpdateBalance(card, transaction.Amount);
+                _repository.Add(transaction);
             }
 
             return HydrateTransactionDto(transaction);
@@ -68,7 +62,8 @@ namespace Magva.Service.Services
 
         public IEnumerable<TransactionDto> GetAll()
         {
-            return _repository.GetAll().Select(x => HydrateTransactionDto(x));
+            var transactions =  _repository.GetAllTransaction().Select(x => HydrateTransactionDto(x));
+            return transactions;
         }
 
         public TransactionDto GetById(Guid id)
@@ -83,28 +78,24 @@ namespace Magva.Service.Services
             _repository.Remove(id);
         }
 
-        public TransactionDto Update(TransactionDto transactionDto)
-        {
-            var transaction = HydrateTransaction(transactionDto);
-            _repository.Update(transaction);
-            return HydrateTransactionDto(transaction);
-        }
-
+     
         private TransactionDto HydrateTransactionDto(Transaction transaction)
         {
             return new TransactionDto
             {
                 Amount = transaction.Amount,
-                CardId = transaction.Card.Id,
+                CardId = transaction.CardId,
                 Id = transaction.Id,
-                CustomerId = transaction.Customer.Id,
                 DateTransaction = transaction.DateTransaction,
                 NumberInstallments = transaction.NumberInstallments,
                 Type = (ETransactionTypeDto)transaction.Type,
+                CardholderName = transaction.Card?.Customer.Name,
+                Number = transaction.Card?.Number
+                
             };
         }
 
-        private Transaction HydrateTransaction(TransactionDto transactionDto)
+        private Transaction HydrateTransaction(TransactionDto transactionDto, CardDto cardDto)
         {
             return new Transaction
             {
@@ -113,8 +104,31 @@ namespace Magva.Service.Services
                 DateTransaction = transactionDto.DateTransaction,
                 NumberInstallments = transactionDto.NumberInstallments,
                 Type = (ETransactionType)transactionDto.Type,
+                Number = transactionDto.Number,
+                CardId = cardDto.Id
             };
         }
+
+        private CardDto HydrateCardDto(Card card)
+        {
+            return new CardDto
+            {
+                Active = card.Active,
+                Balance = card.Balance,
+                CardBrand = card.CardBrand,
+                ExpirationDate = card.ExpirationDate,
+                Number = card.Number,
+                SecurityCode = card.SecurityCode,
+                Password = card.Password,
+                HasPassword = card.HasPassword,
+                Type = (ECardTypeDto)card.Type,
+                Id = card.Id,
+                CardholderName = card.Customer.Name,
+                Document = card.Customer.Document
+                
+            };
+        }
+
 
     }
 

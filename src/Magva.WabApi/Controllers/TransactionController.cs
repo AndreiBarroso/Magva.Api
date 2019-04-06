@@ -16,45 +16,39 @@ namespace Magva.WabApi.Controllers
         }
 
         [HttpPost]
-        [Route("v1/transaction/deposit")]
-        public void Deposit([FromRoute] TransactionDto transactionDto)
+        [Route("v1/transactions/deposit")]
+        public void Deposit([FromBody] TransactionDto transactionDto)
         {
             _service.Deposit(transactionDto);
         }
 
         [HttpPost]
-        [Route("v1/transaction/withdrawal")]
-        public void Withdrawal([FromRoute] TransactionDto transactionDto)
+        [Route("v1/transactions/withdrawal")]
+        public void Withdrawal([FromBody] TransactionDto transactionDto)
         {
             _service.Withdrawal(transactionDto);
         }
 
         [HttpDelete]
-        [Route("v1/transaction/{id}")]
+        [Route("v1/transactions/{id}")]
         public void Delete([FromRoute] Guid id)
         {
             _service.Remove(id);
         }
 
         [HttpGet]
-        [Route("v1/transaction")]
+        [Route("v1/transactions")]
         public IEnumerable<TransactionDto> GetAll()
         {
             return _service.GetAll();
         }
 
         [HttpGet]
-        [Route("v1/transaction/{id}")]
+        [Route("v1/transactions/{id}")]
         public TransactionDto GetById([FromRoute] Guid id)
         {
             return _service.GetById(id);
         }
-
-        [HttpPut]
-        [Route("v1/transaction")]
-        public void Update([FromRoute] TransactionDto transactionDto)
-        {
-            _service.Update(transactionDto);
-        }
+      
     }
 }

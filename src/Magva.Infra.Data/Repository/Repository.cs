@@ -24,6 +24,8 @@ namespace Magva.Infra.Data.Repository
             DbSet.Attach(obj);
             entry.State = EntityState.Added;
 
+            Context.SaveChanges();
+
             return obj;
         }
 
@@ -40,6 +42,7 @@ namespace Magva.Infra.Data.Repository
         public void Remove(Guid id)
         {
             DbSet.Remove(DbSet.Find(id));
+            Context.SaveChanges();
         }
 
         public TEntity Update(TEntity obj)
@@ -47,7 +50,7 @@ namespace Magva.Infra.Data.Repository
             var entry = Context.Entry(obj);
             DbSet.Attach(obj);
             entry.State = EntityState.Modified;
-
+            Context.SaveChanges();
             return obj;
         }
     }

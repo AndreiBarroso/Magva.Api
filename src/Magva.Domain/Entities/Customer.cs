@@ -11,9 +11,6 @@ namespace Magva.Domain.Entities
         public string Document { get; set; }
         public string Phone { get; set; }
 
-
         public virtual IEnumerable<Transaction> Transactions { get; set; }
-
-
     }
 }

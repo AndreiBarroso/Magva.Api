@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Magva.Infra.Data.Migrations
 {
     [DbContext(typeof(MagvaDataContext))]
-    [Migration("20190404212217_NewModelDatabase")]
-    partial class NewModelDatabase
+    [Migration("20190406003617_AddNewMigrations")]
+    partial class AddNewMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,14 +39,12 @@ namespace Magva.Infra.Data.Migrations
                         .HasColumnType("Varchar(25)")
                         .HasMaxLength(25);
 
-                    b.Property<string>("CardholderName")
-                        .IsRequired()
-                        .HasColumnName("CardholderName");
-
                     b.Property<Guid?>("CustomerId");
 
-                    b.Property<DateTime>("ExpirationDate")
-                        .HasColumnName("ExpirationDate");
+                    b.Property<string>("ExpirationDate")
+                        .IsRequired()
+                        .HasColumnName("ExpirationDate")
+                        .HasMaxLength(7);
 
                     b.Property<bool>("HasPassword")
                         .HasColumnName("HasPassword");
@@ -113,15 +111,19 @@ namespace Magva.Infra.Data.Migrations
                         .HasColumnName("money")
                         .HasMaxLength(50);
 
-                    b.Property<Guid?>("CardId");
+                    b.Property<Guid>("CardId");
 
                     b.Property<Guid?>("CustomerId");
 
                     b.Property<DateTime>("DateTransaction")
                         .HasColumnName("DateTransaction");
 
-                    b.Property<int>("NumberInstallments")
+                    b.Property<string>("Number")
+                        .IsRequired()
                         .HasColumnName("Number");
+
+                    b.Property<int>("NumberInstallments")
+                        .HasColumnName("NumberInstallments");
 
                     b.Property<int>("Type")
                         .HasColumnName("Type");
@@ -146,9 +148,10 @@ namespace Magva.Infra.Data.Migrations
                 {
                     b.HasOne("Magva.Domain.Entities.Card", "Card")
                         .WithMany()
-                        .HasForeignKey("CardId");
+                        .HasForeignKey("CardId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Magva.Domain.Entities.Customer", "Customer")
+                    b.HasOne("Magva.Domain.Entities.Customer")
                         .WithMany("Transactions")
                         .HasForeignKey("CustomerId");
                 });

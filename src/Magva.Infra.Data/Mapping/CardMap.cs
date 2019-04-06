@@ -17,11 +17,10 @@ namespace Magva.Infra.Data.Mapping
             builder.Property(x => x.Type).HasColumnName("Type").IsRequired();
             builder.Property(x => x.Active).HasColumnName("Active").IsRequired();
             builder.Property(x => x.HasPassword).HasColumnName("HasPassword").IsRequired();
-            builder.Property(x => x.ExpirationDate).HasColumnName("ExpirationDate").IsRequired();
+            builder.Property(x => x.ExpirationDate).HasColumnName("ExpirationDate").HasMaxLength(7).IsRequired();
             builder.Property(x => x.Number).HasColumnName("Number").IsRequired();
             builder.Property(x => x.SecurityCode).HasColumnName("SecurityCode").HasMaxLength(5).IsRequired();
             builder.Property(x => x.Balance).HasColumnName("Balance").HasColumnType("money").IsRequired();
-            builder.Property(x => x.CardholderName).HasColumnName("CardholderName").IsRequired();
             builder.HasOne(x => x.Customer);
         }
     }

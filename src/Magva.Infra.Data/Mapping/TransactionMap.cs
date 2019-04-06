@@ -13,12 +13,12 @@ namespace Magva.Infra.Data.Mapping
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Amount).HasColumnName("Amount").HasMaxLength(50).HasColumnName("money").IsRequired();
-            builder.Property(x => x.NumberInstallments).HasColumnName("Number").IsRequired();
+            builder.Property(x => x.Number).HasColumnName("Number").IsRequired();
             builder.Property(x => x.Type).HasColumnName("Type").IsRequired();
             builder.Property(x => x.DateTransaction).HasColumnName("DateTransaction").IsRequired();
+            builder.Property(x => x.NumberInstallments).HasColumnName("NumberInstallments").IsRequired();
 
             builder.HasOne(x => x.Card);
-            builder.HasOne(x => x.Customer);
 
         }
     }

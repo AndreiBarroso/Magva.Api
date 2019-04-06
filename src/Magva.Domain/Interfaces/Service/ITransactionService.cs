@@ -9,7 +9,6 @@ namespace Magva.Domain.Interfaces.Service
 
         TransactionDto Withdrawal(TransactionDto transactionDto);
         TransactionDto Deposit(TransactionDto transactionDto);
-        TransactionDto Update(TransactionDto transactionDto);
         void Remove(Guid id);
         TransactionDto GetById(Guid id);
         IEnumerable<TransactionDto> GetAll();

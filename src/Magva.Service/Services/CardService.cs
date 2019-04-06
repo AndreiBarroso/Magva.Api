@@ -8,34 +8,42 @@ using Magva.Infra.Crosscutting.DataTransferObject.Enum;
 using Magva.Domain.Shared.Enum;
 using System.Linq;
 using NETCore.Encrypt;
+using Magva.Infra.Crosscutting.Constants;
 
 namespace Magva.Service.Services
 {
     public class CardService : ICardService
     {
         private readonly ICardRespository _repository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public CardService(ICardRespository repository)
+        public CardService(ICardRespository repository, ICustomerRepository customerRepository)
         {
             _repository = repository;
+            _customerRepository = customerRepository;
         }
 
         public CardDto Add(CardDto cardDto)
         {
-            var card = HydrateCard(cardDto);
+            var customerDto = HydrateCustomerDto(_customerRepository.GetCustomerByDocument(cardDto.Document));
+
+            if (customerDto == null) throw new Exception(ExceptionConstants.CUSTOMER_NOT_EXISTS);
+
+             var card = HydrateCard(cardDto, customerDto);
             _repository.Add(card);
 
             return HydrateCardDto(card);
+
         }
 
         public IEnumerable<CardDto> GetAll()
         {
-            return _repository.GetAll().Select(x => HydrateCardDto(x));
+            return _repository.GetByCardAndCustomer().Select(x => HydrateCardDto(x));
         }
 
         public CardDto GetById(Guid id)
         {
-            var card = _repository.GetById(id);
+            var card = _repository.GetByCardId(id);
             return HydrateCardDto(card);
         }
 
@@ -46,9 +54,14 @@ namespace Magva.Service.Services
 
         public CardDto Update(CardDto cardDto)
         {
-            var card = HydrateCard(cardDto);
+            var customerDto = HydrateCustomerDto(_customerRepository.GetCustomerByDocument(cardDto.Document));
+
+            if (customerDto == null) throw new Exception(ExceptionConstants.CUSTOMER_NOT_EXISTS);
+
+            var card = HydrateCard(cardDto, customerDto);
             _repository.Update(card);
             return HydrateCardDto(card);
+
         }
 
         private CardDto HydrateCardDto(Card card)
@@ -64,12 +77,14 @@ namespace Magva.Service.Services
                 Password = card.Password,
                 HasPassword = card.HasPassword,
                 Type = (ECardTypeDto)card.Type,
-                Name = card.CardholderName,
-                Id = card.Id
+                Id = card.Id,
+                CardholderName = card.Customer.Name,
+                CustomerId = card.Customer.Id,
+                Document = card.Customer.Document
             };
         }
 
-        private Card HydrateCard(CardDto cardDto)
+        private Card HydrateCard(CardDto cardDto, CustomerDto customerDto)
         {
             return new Card
             {
@@ -82,8 +97,24 @@ namespace Magva.Service.Services
                 Password = (cardDto.Password == null) ? EncryptProvider.Base64Encrypt(cardDto.Password) : string.Empty,
                 HasPassword = cardDto.HasPassword,
                 Type = (ECardType)cardDto.Type,
-                CardholderName = cardDto.Name,
-                Id = cardDto.Id
+                Id = cardDto.Id,
+                Customer = new Customer {
+                    Document = customerDto.Document,
+                    Name = customerDto.Name,
+                    Id = customerDto.Id,
+                }
+            };
+        }
+
+        private CustomerDto HydrateCustomerDto(Customer customer)
+        {
+            return new CustomerDto
+            {
+                Id = customer.Id,
+                Name = customer.Name,
+                Document = customer.Document,
+                Email = customer.Document,
+                Phone = customer.Phone
             };
         }
     }
