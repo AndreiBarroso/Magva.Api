@@ -1,4 +1,4 @@
-﻿using Magva.Domain.Validations.Customer;
+﻿using Magva.Domain.Validations.Cards;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Magva.Tests.Validations
@@ -7,34 +7,34 @@ namespace Magva.Tests.Validations
     public class BalanceValidateTests
     {
 
-        private BalanceValidate zero;
-        private BalanceValidate negative;
-        private BalanceValidate positive;
+        private BalanceValidation zero;
+        private BalanceValidation negative;
+        private BalanceValidation positive;
 
         public BalanceValidateTests()
         {
-            zero = new BalanceValidate(0);
-            negative = new BalanceValidate(-3);
-            positive = new BalanceValidate(1);
+            zero = new BalanceValidation(0);
+            negative = new BalanceValidation(-3);
+            positive = new BalanceValidation(1);
 
         }
 
         [TestMethod]
         public void ShouldReturnTrueWhenBalanceIsZeroValue()
         {
-            Assert.AreEqual(true, zero.Valid);
+            Assert.AreEqual(true, zero.negative);
         }
 
         [TestMethod]
         public void ShouldReturnTrueWhenBalanceIsNegativeValue()
         {
-            Assert.AreEqual(true, negative.Valid);
+            Assert.AreEqual(true, negative.negative);
         }
 
         [TestMethod]
         public void ShouldReturnFalseWhenBalanceIsPositiveValue()
         {
-            Assert.AreEqual(false, positive.Valid);
+            Assert.AreEqual(false, positive.positive);
         }
     }
 }

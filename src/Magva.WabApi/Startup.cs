@@ -1,5 +1,6 @@
 ﻿using Magva.Domain.Interfaces.Repository;
 using Magva.Domain.Interfaces.Service;
+using Magva.Infra.Crosscutting;
 using Magva.Infra.Data.DataContext;
 using Magva.Infra.Data.Repository;
 using Magva.Service.Services;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
 
 namespace Magva.WabApi
 {
@@ -19,11 +21,18 @@ namespace Magva.WabApi
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+     
+
+        public static IConfiguration Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
+                
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddScoped<MagvaDataContext, MagvaDataContext>();
@@ -42,6 +51,8 @@ namespace Magva.WabApi
             {
                 x.SwaggerDoc("v1", new Info { Title = "Magva Tecnologia", Version = "v1" });
             });
+
+      //      Settings.ConnectionString = $"{}"
 
         }
 
@@ -73,7 +84,7 @@ namespace Magva.WabApi
                 c.RoutePrefix = string.Empty;
             });
 
-         
+
             app.UseMvc();
         }
     }

@@ -5,7 +5,6 @@ using Magva.Domain.Interfaces.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Magva.Domain.Shared.ValueObject;
 
 namespace Magva.Service.Services
 {
@@ -38,6 +37,7 @@ namespace Magva.Service.Services
         public CustomerDto Register(CustomerDto customerDto)
         {
             var customer = HydrateCustomer(customerDto);
+
             _repository.Add(customer);
 
             return HydrateCustomerDto(customer);

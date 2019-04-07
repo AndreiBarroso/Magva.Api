@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using Magva.Infra.Crosscutting.DataTransferObject;
 using Magva.Domain.Interfaces.Repository;
 using Magva.Domain.Interfaces.Service;
-using Magva.Domain.Validations.Customer;
 using System.Linq;
 using Magva.Domain.Entities;
 using Magva.Infra.Crosscutting.DataTransferObject.Enum;
 using Magva.Domain.Shared.Enum;
+using Magva.Infra.Crosscutting.Constants;
+using FluentValidator;
+using Magva.Infra.Crosscutting.CustomExceptions;
+using Magva.Domain.Validations.Cards;
 
 namespace Magva.Service.Services
 {
-    public class TransactionService : ITransactionService
+    public class TransactionService : Notifiable, ITransactionService
     {
         private readonly ITransactionRepository _repository;
         private readonly ICardRespository _cardRepository;
@@ -26,18 +29,26 @@ namespace Magva.Service.Services
 
         public TransactionDto Withdrawal(TransactionDto transactionDto)
         {
-            var card = HydrateCardDto(_cardRepository.GetCardByNumberAndSecurityCode(transactionDto.Number, transactionDto.SecurityCode));
+            var card = _cardRepository.GetCardByNumberAndSecurityCode(transactionDto.Number, transactionDto.SecurityCode);
+            var cardDto = HydrateCardDto(card);
+            var transaction = HydrateTransaction(transactionDto, cardDto);
 
-            var balanceValidate = new BalanceValidate(card.Balance);
+
+            var balanceValidate = new BalanceValidation(card.Balance);
+
+            if (balanceValidate.negative)
+                throw new HandlerException(ExceptionConstants.INSUFFICIENT_BALANCE);
+
+            if (!card.Active)
+                throw new HandlerException(ExceptionConstants.CARD_BLOCKED);
 
 
-            var transaction = HydrateTransaction(transactionDto, card);
-
-            if (card.Active && balanceValidate.Valid && 
-                (card.Number.Equals(transactionDto.Number)))
+            if ((card.Number.Equals(transactionDto.Number)))
             {
+                _cardRepository.UpdateBalance(card, (-transaction.Amount));
                 _repository.Add(transaction);
             }
+
             return HydrateTransactionDto(transaction);
 
         }
@@ -45,12 +56,18 @@ namespace Magva.Service.Services
         public TransactionDto Deposit(TransactionDto transactionDto)
         {
             var card = _cardRepository.GetCardByNumberAndSecurityCode(transactionDto.Number, transactionDto.SecurityCode);
-
             var cardDto = HydrateCardDto(card);
-
             var transaction = HydrateTransaction(transactionDto, cardDto);
 
-            if (cardDto.Active && (cardDto.Number.Equals(transactionDto.Number)))
+
+            var balanceValidate = new BalanceValidation(card.Balance);
+           
+
+            if (!card.Active)
+                throw new HandlerException(ExceptionConstants.CARD_BLOCKED);
+
+
+            if ((card.Number.Equals(transactionDto.Number)))
             {
                 _cardRepository.UpdateBalance(card, transaction.Amount);
                 _repository.Add(transaction);
@@ -62,7 +79,7 @@ namespace Magva.Service.Services
 
         public IEnumerable<TransactionDto> GetAll()
         {
-            var transactions =  _repository.GetAllTransaction().Select(x => HydrateTransactionDto(x));
+            var transactions = _repository.GetAllTransaction().Select(x => HydrateTransactionDto(x));
             return transactions;
         }
 
@@ -78,7 +95,7 @@ namespace Magva.Service.Services
             _repository.Remove(id);
         }
 
-     
+
         private TransactionDto HydrateTransactionDto(Transaction transaction)
         {
             return new TransactionDto
@@ -89,9 +106,9 @@ namespace Magva.Service.Services
                 DateTransaction = transaction.DateTransaction,
                 NumberInstallments = transaction.NumberInstallments,
                 Type = (ETransactionTypeDto)transaction.Type,
-                CardholderName = transaction.Card?.Customer.Name,
+                CardholderName = transaction.Card?.Customer?.Name,
                 Number = transaction.Card?.Number
-                
+
             };
         }
 
@@ -125,7 +142,7 @@ namespace Magva.Service.Services
                 Id = card.Id,
                 CardholderName = card.Customer.Name,
                 Document = card.Customer.Document
-                
+
             };
         }
 

@@ -1,11 +1,14 @@
-﻿using Magva.Domain.Shared.Entities;
+﻿using DomainValidation.Validation;
+using FluentValidator;
+using Magva.Domain.Shared.Entities;
 using Magva.Domain.Shared.Enum;
 
 namespace Magva.Domain.Entities
 {
     public class Card : Entity
     {
-  
+
+
         public string Number { get; set; }
         public int SecurityCode { get; set; }
         public string ExpirationDate { get; set; }
@@ -16,6 +19,9 @@ namespace Magva.Domain.Entities
         public bool HasPassword { get; set; }
         public decimal Balance { get; set; }
 
+
         public virtual Customer Customer { get; set; }
+
+     
     }
 }

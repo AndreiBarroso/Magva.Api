@@ -1,14 +1,18 @@
-﻿using Magva.Infra.Crosscutting.DataTransferObject.Enum;
+﻿using FluentValidator;
+using FluentValidator.Validation;
+using Magva.Infra.Crosscutting.DataTransferObject.Enum;
 using System;
+using System.Collections.Generic;
 
 namespace Magva.Infra.Crosscutting.DataTransferObject
 {
-    public class TransactionDto
+    public class TransactionDto 
     {
         public TransactionDto()
         {
             DateTransaction = DateTime.Now;
         }
+
         public Guid Id { get; set; }
         public decimal Amount { get; set; }
         public ETransactionTypeDto Type { get; set; }
@@ -21,7 +25,6 @@ namespace Magva.Infra.Crosscutting.DataTransferObject
         public string Document { get; set; }
         public Guid CardId { get; set; }
         public Guid CustomerId { get; set; }
-
-
+ 
     }
 }

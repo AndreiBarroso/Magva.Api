@@ -73,7 +73,23 @@ namespace Magva.Infra.Data.Repository
 
         public void UpdateBalance(Card card, decimal balance)
         {
-            _context.Cards.Attach(card).Property(x => x.Balance).IsModified = true;
+            var _card = new Card
+            {
+                Id = card.Id,
+                Active = card.Active,
+                Balance = card.Balance + balance,
+                CardBrand = card.CardBrand,
+                ExpirationDate = card.ExpirationDate,
+                HasPassword = card.HasPassword,
+                Number = card.Number,
+                Password = card.Password,
+                SecurityCode = card.SecurityCode,
+                Type = card.Type,
+                Customer = card.Customer,
+            
+            };
+
+            _context.Cards.Attach(_card).Property(x => x.Balance).IsModified = true;
 
             _context.SaveChanges();
 

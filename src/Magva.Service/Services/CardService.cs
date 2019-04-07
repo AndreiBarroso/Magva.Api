@@ -56,7 +56,7 @@ namespace Magva.Service.Services
         {
             var customerDto = HydrateCustomerDto(_customerRepository.GetCustomerByDocument(cardDto.Document));
 
-            if (customerDto == null) throw new Exception(ExceptionConstants.CUSTOMER_NOT_EXISTS);
+            
 
             var card = HydrateCard(cardDto, customerDto);
             _repository.Update(card);
