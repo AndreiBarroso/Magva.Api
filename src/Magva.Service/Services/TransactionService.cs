@@ -11,6 +11,7 @@ using Magva.Infra.Crosscutting.Constants;
 using FluentValidator;
 using Magva.Infra.Crosscutting.CustomExceptions;
 using Magva.Domain.Validations.Cards;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Magva.Service.Services
 {
@@ -32,15 +33,18 @@ namespace Magva.Service.Services
             var card = _cardRepository.GetCardByNumberAndSecurityCode(transactionDto.Number, transactionDto.SecurityCode);
             var cardDto = HydrateCardDto(card);
             var transaction = HydrateTransaction(transactionDto, cardDto);
-
-
             var balanceValidate = new BalanceValidation(card.Balance);
 
-            if (balanceValidate.negative)
-                throw new HandlerException(ExceptionConstants.INSUFFICIENT_BALANCE);
+
+            if (card == null)
+                return HydrateTransactionDto(transaction, ExceptionConstants.CARD_NOT_EXISTS);
 
             if (!card.Active)
-                throw new HandlerException(ExceptionConstants.CARD_BLOCKED);
+                return HydrateTransactionDto(transaction, ExceptionConstants.CARD_BLOCKED);
+
+            if (balanceValidate.negative)
+             return HydrateTransactionDto(transaction, ExceptionConstants.INSUFFICIENT_BALANCE);
+
 
 
             if ((card.Number.Equals(transactionDto.Number)))
@@ -49,7 +53,7 @@ namespace Magva.Service.Services
                 _repository.Add(transaction);
             }
 
-            return HydrateTransactionDto(transaction);
+            return HydrateTransactionDto(transaction, ExceptionConstants.CREATE_SUCCESS);
 
         }
 
@@ -61,10 +65,10 @@ namespace Magva.Service.Services
 
 
             var balanceValidate = new BalanceValidation(card.Balance);
-           
+
 
             if (!card.Active)
-                throw new HandlerException(ExceptionConstants.CARD_BLOCKED);
+                return HydrateTransactionDto(transaction, ExceptionConstants.CARD_BLOCKED);
 
 
             if ((card.Number.Equals(transactionDto.Number)))
@@ -73,20 +77,20 @@ namespace Magva.Service.Services
                 _repository.Add(transaction);
             }
 
-            return HydrateTransactionDto(transaction);
+            return HydrateTransactionDto(transaction, ExceptionConstants.CREATE_SUCCESS);
         }
 
 
         public IEnumerable<TransactionDto> GetAll()
         {
-            var transactions = _repository.GetAllTransaction().Select(x => HydrateTransactionDto(x));
+            var transactions = _repository.GetAllTransaction().Select(x => HydrateTransactionDto(x, ExceptionConstants.REQUEST_SUCCESS));
             return transactions;
         }
 
         public TransactionDto GetById(Guid id)
         {
             var transaction = _repository.GetById(id);
-            return HydrateTransactionDto(transaction);
+            return HydrateTransactionDto(transaction, ExceptionConstants.REQUEST_SUCCESS);
 
         }
 
@@ -96,7 +100,7 @@ namespace Magva.Service.Services
         }
 
 
-        private TransactionDto HydrateTransactionDto(Transaction transaction)
+        private TransactionDto HydrateTransactionDto(Transaction transaction, string info)
         {
             return new TransactionDto
             {
@@ -107,10 +111,12 @@ namespace Magva.Service.Services
                 NumberInstallments = transaction.NumberInstallments,
                 Type = (ETransactionTypeDto)transaction.Type,
                 CardholderName = transaction.Card?.Customer?.Name,
-                Number = transaction.Card?.Number
+                Number = transaction.Card?.Number,
+                Message = info
 
             };
         }
+
 
         private Transaction HydrateTransaction(TransactionDto transactionDto, CardDto cardDto)
         {
@@ -145,7 +151,6 @@ namespace Magva.Service.Services
 
             };
         }
-
 
     }
 

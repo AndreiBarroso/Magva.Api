@@ -9,6 +9,7 @@ using Magva.Domain.Shared.Enum;
 using System.Linq;
 using NETCore.Encrypt;
 using Magva.Infra.Crosscutting.Constants;
+using Magva.Domain.Validations.Cards;
 
 namespace Magva.Service.Services
 {
@@ -25,26 +26,29 @@ namespace Magva.Service.Services
 
         public CardDto Add(CardDto cardDto)
         {
-            var customerDto = HydrateCustomerDto(_customerRepository.GetCustomerByDocument(cardDto.Document));
+            var customerDto = HydrateCustomerDto(_customerRepository.GetCustomerByDocument(cardDto.Document), ExceptionConstants.CUSTOMER_NOT_EXISTS);
+            var password = new PasswordLengthValidation(cardDto.Password);
+            var card = HydrateCard(cardDto, customerDto);
 
-            if (customerDto == null) throw new Exception(ExceptionConstants.CUSTOMER_NOT_EXISTS);
+            if (cardDto.Password != null && password.Invalid)
+                return HydrateCardDto(card, ExceptionConstants.ERROR_IN_PASSWORD_SIZE);
 
-             var card = HydrateCard(cardDto, customerDto);
+
             _repository.Add(card);
 
-            return HydrateCardDto(card);
+            return HydrateCardDto(card, ExceptionConstants.CREATE_SUCCESS);
 
         }
 
         public IEnumerable<CardDto> GetAll()
         {
-            return _repository.GetByCardAndCustomer().Select(x => HydrateCardDto(x));
+            return _repository.GetByCardAndCustomer().Select(x => HydrateCardDto(x, ExceptionConstants.REQUEST_SUCCESS));
         }
 
         public CardDto GetById(Guid id)
         {
             var card = _repository.GetByCardId(id);
-            return HydrateCardDto(card);
+            return HydrateCardDto(card, ExceptionConstants.REQUEST_SUCCESS);
         }
 
         public void Remove(Guid id)
@@ -54,17 +58,20 @@ namespace Magva.Service.Services
 
         public CardDto Update(CardDto cardDto)
         {
-            var customerDto = HydrateCustomerDto(_customerRepository.GetCustomerByDocument(cardDto.Document));
-
-            
-
+            var customerDto = HydrateCustomerDto(_customerRepository.GetCustomerByDocument(cardDto.Document), ExceptionConstants.CUSTOMER_NOT_EXISTS);
             var card = HydrateCard(cardDto, customerDto);
+
+
+            if (customerDto == null)
+                return HydrateCardDto(card, customerDto.Message);
+
+
             _repository.Update(card);
-            return HydrateCardDto(card);
+            return HydrateCardDto(card, ExceptionConstants.CREATE_SUCCESS);
 
         }
 
-        private CardDto HydrateCardDto(Card card)
+        private CardDto HydrateCardDto(Card card, string message)
         {
             return new CardDto
             {
@@ -80,7 +87,8 @@ namespace Magva.Service.Services
                 Id = card.Id,
                 CardholderName = card.Customer.Name,
                 CustomerId = card.Customer.Id,
-                Document = card.Customer.Document
+                Document = card.Customer.Document,
+                Message = message,
             };
         }
 
@@ -94,11 +102,12 @@ namespace Magva.Service.Services
                 ExpirationDate = cardDto.ExpirationDate,
                 Number = cardDto.Number,
                 SecurityCode = cardDto.SecurityCode,
-                Password = (cardDto.Password == null) ? EncryptProvider.Base64Encrypt(cardDto.Password) : string.Empty,
+                Password = (cardDto.Password != null) ? EncryptProvider.Base64Encrypt(cardDto.Password) : string.Empty,
                 HasPassword = cardDto.HasPassword,
                 Type = (ECardType)cardDto.Type,
                 Id = cardDto.Id,
-                Customer = new Customer {
+                Customer = new Customer
+                {
                     Document = customerDto.Document,
                     Name = customerDto.Name,
                     Id = customerDto.Id,
@@ -106,7 +115,7 @@ namespace Magva.Service.Services
             };
         }
 
-        private CustomerDto HydrateCustomerDto(Customer customer)
+        private CustomerDto HydrateCustomerDto(Customer customer, string messsage)
         {
             return new CustomerDto
             {
@@ -114,7 +123,8 @@ namespace Magva.Service.Services
                 Name = customer.Name,
                 Document = customer.Document,
                 Email = customer.Document,
-                Phone = customer.Phone
+                Phone = customer.Phone,
+                Message = messsage,
             };
         }
     }

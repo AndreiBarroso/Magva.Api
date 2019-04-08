@@ -18,6 +18,7 @@ namespace Magva.Infra.Crosscutting.DataTransferObject
         public Guid CustomerId { get; set; }
         public string Document { get; set; }
         public string CardholderName { get; set; }
+        public string Message { get; set; }
 
 
     }

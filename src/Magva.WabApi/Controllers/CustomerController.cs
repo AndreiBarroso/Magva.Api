@@ -17,10 +17,9 @@ namespace Magva.WabApi.Controllers
 
         [HttpPost]
         [Route("v1/customers")]
-        public void Insert([FromBody] CustomerDto customerDto)
+        public CustomerDto Insert([FromBody] CustomerDto customerDto)
         {
-            if (customerDto == null) throw new Exception();
-            _service.Register(customerDto);
+            return _service.Register(customerDto);
         }
 
         [HttpDelete]
@@ -46,9 +45,9 @@ namespace Magva.WabApi.Controllers
 
         [HttpPut]
         [Route("v1/customers")]
-        public void Update([FromRoute] CustomerDto customer)
+        public CustomerDto Update([FromRoute] CustomerDto customer)
         {
-            _service.Update(customer);
+           return  _service.Update(customer);
         }
 
     }

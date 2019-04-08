@@ -17,16 +17,16 @@ namespace Magva.WabApi.Controllers
 
         [HttpPost]
         [Route("v1/transactions/deposit")]
-        public void Deposit([FromBody] TransactionDto transactionDto)
+        public TransactionDto Deposit([FromBody] TransactionDto transactionDto)
         {
-            _service.Deposit(transactionDto);
+            return _service.Deposit(transactionDto);
         }
 
         [HttpPost]
         [Route("v1/transactions/withdrawal")]
-        public void Withdrawal([FromBody] TransactionDto transactionDto)
+        public TransactionDto Withdrawal([FromBody] TransactionDto transactionDto)
         {
-            _service.Withdrawal(transactionDto);
+          return  _service.Withdrawal(transactionDto);
         }
 
         [HttpDelete]

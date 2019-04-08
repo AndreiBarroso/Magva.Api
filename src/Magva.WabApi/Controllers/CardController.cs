@@ -17,9 +17,9 @@ namespace Magva.WabApi.Controllers
 
         [HttpPost]
         [Route("v1/cards")]
-        public void Insert([FromBody] CardDto cardDto)
+        public CardDto Insert([FromBody] CardDto cardDto)
         {
-            _service.Add(cardDto);
+            return _service.Add(cardDto);
         }
 
 
@@ -46,9 +46,9 @@ namespace Magva.WabApi.Controllers
 
         [HttpPut]
         [Route("v1/cards")]
-        public void Update([FromBody] CardDto cardDto)
+        public CardDto Update([FromBody] CardDto cardDto)
         {
-            _service.Update(cardDto);
+            return _service.Update(cardDto);
         }
     }
 }

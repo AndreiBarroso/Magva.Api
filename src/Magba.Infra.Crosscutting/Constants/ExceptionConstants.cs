@@ -10,7 +10,10 @@
         public static string DOCUMENT_IS_NOT_VALID = "DOCUMENT_IS_NOT_VALID";
         public static string CUSTOMER_NOT_EXISTS = "DOCUMENT_NOT_EXISTS";
         public static string EMAIL_IS_NOT_VALID = "EMAIL_IS_NOT_VALID";
-      
+        public static string CREATE_SUCCESS = "CREATE_SUCCESS";
+        public static string UPDATE_SUCCESS = "UPDATE_SUCCESS";
+        public static string REQUEST_SUCCESS = "REQUEST_SUCCESS";
+        public static string CARD_NOT_EXISTS = "CARD_NOT_EXISTS";
 
     }
 }

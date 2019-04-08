@@ -2,11 +2,17 @@
 {
     public class PasswordLengthValidation
     {
+        public PasswordLengthValidation(string password)
+        {
+            LengthIsNotValid(password);
 
-        public static bool Valid { get; set; }
-        public static bool Invalid { get; set; }
+        }
 
-        public static bool LengthIsNotValid(string password)
+
+        public readonly bool Valid = false;
+        public readonly bool Invalid = true;
+
+        public bool LengthIsNotValid(string password)
         {
             return (password.Length < 4 || password.Length > 6) ? Valid : Invalid;
         }

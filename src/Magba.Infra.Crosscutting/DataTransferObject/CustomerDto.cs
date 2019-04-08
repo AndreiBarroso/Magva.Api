@@ -9,6 +9,7 @@ namespace Magva.Infra.Crosscutting.DataTransferObject
         public string Email { get; set; }
         public string Document { get; set; }
         public string Phone { get; set; }
-      
+        public string Message { get; set; }
+
     }
 }
